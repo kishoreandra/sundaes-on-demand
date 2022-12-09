@@ -2,18 +2,18 @@ import axios from "axios";
 import { useState } from "react";
 import { useEffect } from "react";
 import ScoopOption from "./ScoopOption";
+import ToppingOption from "./ToppingOption";
 
-export default function Options({ optionType = "scoops" }) {
+export default function Options({ optionType = "toppings" }) {
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios.get(`http://localhost:3030/${optionType}`).then((response) => {
       setData(response.data);
-      console.log(response);
     });
   }, [optionType]);
 
-  const ItemComponent = optionType === "scoops" ? ScoopOption : null;
+  const ItemComponent = optionType === "scoops" ? ScoopOption : ToppingOption;
 
   const optionItems = data.map((item) => {
     return (
